@@ -38,39 +38,69 @@ namespace ST10257503.PROG6221POEPart1
         }
 
         //******************************* end of constructor ***********************//
-        public void CaptureRecipeDetails() {
+
+
+
+
+
+        //************************************* start of capure method ********************************//
+
+
+        /*
+         
+         The purpose of this mwthod is to capture the details regarding the recipe
+         we will need to capture: name, quantity and quantity
+         
+         */
+        public void CaptureRecipeDetails()
+        {
 
             /////////////////////////////// start of field declerations ////////////////////////////
-            
+
             int stepCount;
+
             string step;
+
             int ingredientNumbers;
 
             string ingredientName;
+
             double ingredientQuantity;
+
             string ingredientMeasurement;
 
-            //////////////////////////////// end of field declerations ////////////////////////////////// 
-           
+            int i;
 
-            Console.WriteLine("Please enter how many ingredients are needed for this recipe: ");
+            int x;
+
+            //////////////////////////////// end of field declerations ////////////////////////////////// 
+
+
+            Console.WriteLine("Enter how many ingridents will be used in this recipe : ");
 
             ingredientNumbers = int.Parse(Console.ReadLine());
 
-            for (int i = 0; i < ingredientNumbers; i++)
+            for (i = 0; i < ingredientNumbers; i++)
             {
                 Console.WriteLine($"Enter the name of ingredient {i + 1}: ");
 
                 ingredientName = Console.ReadLine();
 
+
+
                 Console.WriteLine($"Enter the quantity for {ingredientName}: ");
 
                 ingredientQuantity = double.Parse(Console.ReadLine());
+
+
 
                 Console.WriteLine($"Enter the measurement for the {ingredientName}: ");
 
 
                 ingredientMeasurement = Console.ReadLine();
+
+
+
 
                 ingredients.Add(new Ingredient(ingredientName, ingredientQuantity, ingredientMeasurement));
             }
@@ -78,10 +108,12 @@ namespace ST10257503.PROG6221POEPart1
             Console.WriteLine("Enter the number of steps: ");
             stepCount = int.Parse(Console.ReadLine());
 
-            for (int x = 0; x < stepCount; x++)
+            for (x = 0; x < stepCount; x++)
             {
                 Console.WriteLine($"Enter step {x + 1}: ");
+
                 step = Console.ReadLine();
+
                 steps.Add(step);
             }
 
@@ -89,9 +121,34 @@ namespace ST10257503.PROG6221POEPart1
 
         }
 
+        //************************************* end of capure method ********************************//
+
+        public void PrintRecipe() {
+        
+        
+        
+        }
+
+
+        public void IncreaseScale() {
+        
+        
+        
+        }
+
+
+        public void ResetToOriginal() { 
+        
+        
+        }
+
+        public void ClearData() { 
+        
+        
+        
+        }
 
     }
 }
-
 
 //******************************************** end of file *************************************************//
