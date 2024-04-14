@@ -94,12 +94,26 @@ namespace ST10257503.PROG6221POEPart1
             Console.WriteLine("follow the steps below ");
 
 
-            Console.WriteLine("Enter how many ingridents will be used in this recipe : ");
-
-            ingredientNum = int.Parse(Console.ReadLine());
 
 
 
+
+
+            try
+            {
+
+                Console.WriteLine("Enter how many ingridents will be used in this recipe : ");
+
+                ingredientNum = int.Parse(Console.ReadLine());
+
+
+            }
+            catch (FormatException e) 
+            {
+                Console.WriteLine(" ENTER NUMBERS ONLY ");
+
+                return;
+            }
 
 
             for (i = 0; i < ingredientNum; i++)
@@ -109,17 +123,27 @@ namespace ST10257503.PROG6221POEPart1
                 ingName = Console.ReadLine();
 
 
+                try
+                {
+                    Console.WriteLine($"Enter the quantity for {ingName}: ");
 
-                Console.WriteLine($"Enter the quantity for {ingName}: ");
+                    ingredientQuantity = int.Parse(Console.ReadLine());
+                }
+                catch (FormatException e) {
 
-                ingredientQuantity = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Please enter your answer in numerical notation");
 
+                    return;
+                }
 
 
                 Console.WriteLine($"Enter the measurement for the {ingName}: ");
 
 
                 ingredientMeasurement = Console.ReadLine();
+
+
+
 
                 Console.WriteLine($"Would you like to add anything extra? Enter 'yes' or 'no': ");
 
@@ -139,9 +163,26 @@ namespace ST10257503.PROG6221POEPart1
                 ingredients.Add(new Ingredient(ingName, ingredientQuantity, ingredientMeasurement,additionalYES));
             }
 
-            Console.WriteLine("Enter the number of steps: ");
 
-            stepCount = int.Parse(Console.ReadLine());
+
+
+
+            try
+            {
+
+                Console.WriteLine("Enter the number of steps: ");
+
+                stepCount = int.Parse(Console.ReadLine());
+
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine("Steps requires a numerical input");
+
+                return;
+            }
+
+
 
             for (x = 0; x < stepCount; x++)
             {
@@ -225,12 +266,45 @@ namespace ST10257503.PROG6221POEPart1
         {
             int fact;
 
-           // string updatedQuantities;
-
-            Console.WriteLine("Enter how much you want to scale the recipe by I.e 0.5, 2, 3 etc : ");
+            // string updatedQuantities;
 
 
-            fact = int.Parse( Console.ReadLine() );
+            try
+            {
+
+                Console.WriteLine("Enter how much you want to scale the recipe by I.e 0.5, 2, 3 etc : ");
+
+
+                fact = int.Parse(Console.ReadLine());
+            }
+            catch (FormatException e)
+            {
+
+                Console.WriteLine("Enter numbers please");
+                return;
+            }
+            catch (DivideByZeroException e)
+            {
+
+                Console.WriteLine("you cannot divide by zero!");
+
+                return;
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine("Theres been an error");
+                return;
+            }
+            finally {
+
+                Console.WriteLine("You will be relocated to the menu system ");
+            
+            }
+
+
+
+
 
             foreach (Ingredient ingredient in ingredients)
 

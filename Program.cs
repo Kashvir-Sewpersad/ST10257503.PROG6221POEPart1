@@ -34,37 +34,45 @@ namespace ST10257503.PROG6221POEPart1
 
             int choice;
 
+
+
+
             Console.WriteLine("Welcome to the recipe app ");
 
             Console.WriteLine("We just need some information and we can get started");
 
+            Console.WriteLine(" \n ");
+
             while (true) {
 
-                Console.WriteLine("Menu system");
+                Console.WriteLine(" ------------- Menu system --------------- ");
              //   Console.WriteLine("\n");
-                Console.WriteLine("1. Make new recipe");
+                Console.WriteLine("1.**** Make new recipe ****");
               //  Console.WriteLine("\n");
-                Console.WriteLine("2. Display a recipe");
+                Console.WriteLine("2.**** Display a recipe ****");
                // Console.WriteLine("\n");
-                Console.WriteLine("3. Scale up or down a recipe");
+                Console.WriteLine("3.**** Scale up or down a recipe ****");
               //  Console.WriteLine("\n");
-                Console.WriteLine("4. Reset");
+                Console.WriteLine("4.**** Reset ****");
              //   Console.WriteLine("\n");
-                Console.WriteLine("5. Delete recipe");
+                Console.WriteLine("5.**** Delete recipe ****");
               //  Console.WriteLine("\n");
-                Console.WriteLine("6. Exit menu");
+                Console.WriteLine("6.**** Exit menu ****");
 
-                
+                Console.WriteLine(" ----------------------------------------- ");
 
-               try
+                try
                 {
                     Console.WriteLine("Enter corresponding number ");
+
                      choice = int.Parse(Console.ReadLine());
 
                 }
                 catch(FormatException e)
                 {
+                    Console.WriteLine("\n");
                     Console.WriteLine("Enter only numbers ");
+                    Console.WriteLine("\n");
                     //  return;
                     continue;
 
