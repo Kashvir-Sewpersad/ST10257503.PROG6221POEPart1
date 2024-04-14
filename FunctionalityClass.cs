@@ -71,7 +71,7 @@ namespace ST10257503.PROG6221POEPart1
 
             string additional;
 
-            string additionalYES = " " ;
+            string additionalYES = " ";
 
             string extraStep;
 
@@ -108,7 +108,7 @@ namespace ST10257503.PROG6221POEPart1
 
 
             }
-            catch (FormatException e) 
+            catch (FormatException e)
             {
                 Console.WriteLine(" ENTER NUMBERS ONLY ");
 
@@ -160,7 +160,7 @@ namespace ST10257503.PROG6221POEPart1
                     Console.WriteLine("No aditional information added ");
                 }
 
-                ingredients.Add(new Ingredient(ingName, ingredientQuantity, ingredientMeasurement,additionalYES));
+                ingredients.Add(new Ingredient(ingName, ingredientQuantity, ingredientMeasurement, additionalYES));
             }
 
 
@@ -194,17 +194,17 @@ namespace ST10257503.PROG6221POEPart1
 
                 extraStep = Console.ReadLine();
 
-                if (extraStep.ToLower()== "yes")
+                if (extraStep.ToLower() == "yes")
                 {
 
                     Console.WriteLine("enter the extra step you would like to add : ");
 
                     extraStepYes = Console.ReadLine();
                 }
-                else { 
-                
-                Console.WriteLine("no additional steps ");
-                
+                else {
+
+                    Console.WriteLine("no additional steps ");
+
                 }
 
                 steps.Add(step);
@@ -252,7 +252,7 @@ namespace ST10257503.PROG6221POEPart1
             {
 
 
-                Console.WriteLine($" {y + 1}.   {steps [ y ] } ");
+                Console.WriteLine($" {y + 1}.   {steps[y]} ");
 
 
             }
@@ -269,89 +269,95 @@ namespace ST10257503.PROG6221POEPart1
             // string updatedQuantities;
 
 
-            try
-            {
+            
 
-                Console.WriteLine("Enter how much you want to scale the recipe by I.e 0.5, 2, 3 etc : ");
+                try
+                {
+
+                    Console.WriteLine("Enter how much you want to scale the recipe by I.e 0.5, 2, 3 etc : ");
 
 
-                fact = int.Parse(Console.ReadLine());
-                if (fact <= 0) {
-                    Console.WriteLine("You cannot use values under 0");
+                    fact = int.Parse(Console.ReadLine());
+                    if (fact <= 0) {
+                        Console.WriteLine("You cannot use values under 0");
+                        return ;
+                    }
+                    
+                }
+
+
+                catch (FormatException e)
+                {
+
+                    Console.WriteLine("Enter numbers please");
+                    return;
+                }
+                catch (DivideByZeroException e)
+                {
+
+                    Console.WriteLine("you cannot divide by zero!");
+
+                    return;
+                }
+                catch (Exception e)
+                {
+
+                    Console.WriteLine("Theres been an error");
+                    return;
+                }
+                finally {
+
+                    Console.WriteLine("You will be relocated to the menu system ");
+
+                }
+
+
+
+
+
+                foreach (Ingredient ingredient in ingredients)
+
+                {
+
+                    ingredient.Quantity *= fact;
+
+                }
+
+
+
+                Console.WriteLine("Recipe scaled successfully!");
+
+
+
+                /* we will need to display the increased size of the recipe */
+
+                Console.WriteLine(" ---------- Updated  quantity of recipe ---------- ");
+
+                foreach (var ingredient in ingredients)
+                {
+
+                    Console.WriteLine($"{ingredient.Quantity * fact}  of {ingredient.Name} ");
+
+
                 }
             }
-            catch (FormatException e)
+
+
+
+            public void Reset()
             {
 
-                Console.WriteLine("Enter numbers please");
-                return;
+
             }
-            catch (DivideByZeroException e)
+
+            public void Clear()
             {
+                ingredients.Clear();
 
-                Console.WriteLine("you cannot divide by zero!");
-
-                return;
-            }
-            catch (Exception e)
-            {
-
-                Console.WriteLine("Theres been an error");
-                return;
-            }
-            finally {
-
-                Console.WriteLine("You will be relocated to the menu system ");
-            
+                steps.Clear();
             }
 
-
-
-
-
-            foreach (Ingredient ingredient in ingredients)
-
-            {
-
-                ingredient.Quantity *= fact;
-
-            }
-
-            
-
-            Console.WriteLine("Recipe scaled successfully!");
-
-
-
-            /* we will need to display the increased size of the recipe */
-
-            Console.WriteLine(" ---------- Updated  quantity of recipe ---------- ");
-
-            foreach (var ingredient in ingredients)
-            {
-
-                Console.WriteLine($"{ingredient.Quantity * fact}  of {ingredient.Name} ");
-
-
-            }
         }
-
-
-
-        public void Reset() 
-        { 
-        
-        
-        }
-
-        public void Clear()
-        {
-            ingredients.Clear();
-
-            steps.Clear();
-        }
-
     }
-}
 
 //******************************************** end of file *************************************************//
