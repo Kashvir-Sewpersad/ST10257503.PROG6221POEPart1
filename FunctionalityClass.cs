@@ -286,9 +286,16 @@ namespace ST10257503.PROG6221POEPart1
 
             try
             {
+                
                 Console.WriteLine("Enter how much you want to scale the recipe by (e.g., 0.5, 2, 3, etc): ");
+                //  Console.WriteLine("Ensure to use a comma ( , ) if scaling up or down by a fraction");
 
-                fact = double.Parse(Console.ReadLine()); // converting and storing user input 
+
+                /*
+                 .Replace('.' , ',') needed to be added. the program would not read a ' . ' and jumpp straight into the catch block when scaling up or down with a fraction
+                 
+                 */
+                fact = double.Parse(Console.ReadLine().Replace('.' , ',')    ); // converting and storing user input 
 
                 if (fact <= 0)
                 {
