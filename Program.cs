@@ -11,14 +11,20 @@ namespace ST10257503.PROG6221POEPart1
 {
     internal class Program
     {/// <summary>
-    /// Kashvir Sewpersad
-    /// ST10257503
-    /// 
-    /// -ref
-    /// 
-    /// </summary>
-    /// <param name="args"></param>
-    /// 
+     /// Name : Kashvir Sewpersad
+     /// Student number : ST10257503
+     /// Group : Group 1
+     /// 
+     /// -refrences
+     /// 
+     /// B. C. (2021, July 3). C# exception handling ⚠️. YouTube. https://www.youtube.com/watch?v=QqWfw_CFR6Q
+     /// T. (2018, February 5). C# - Arrays. YouTube. https://www.youtube.com/watch?v=daFdTssjm3w
+     /// E. T. (2018, November 28). 22. C# - ArrayLists. YouTube. https://www.youtube.com/watch?v=1zQLRK_YCt8
+     /// 
+     /// 
+     /// </summary>
+     /// <param name="args"></param>
+     /// 
 
         //******************** start of main method and entry to program ***********************// 
 

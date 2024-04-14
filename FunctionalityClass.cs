@@ -11,6 +11,9 @@ namespace ST10257503.PROG6221POEPart1
 {
     /// <summary>
     /// 
+    /// 
+    /// 
+    /// 
     /// </summary>
     /// 
 
@@ -217,6 +220,8 @@ namespace ST10257503.PROG6221POEPart1
 
                     Console.WriteLine("no additional steps ");
 
+
+
                 }
 
                 steps.Add(step); // Here i am adding the steps to the array
@@ -297,25 +302,30 @@ namespace ST10257503.PROG6221POEPart1
                  */
                 fact = double.Parse(Console.ReadLine().Replace('.' , ',')    ); // converting and storing user input 
 
-                if (fact <= 0)
+                if (fact <= 0) // This prevents users from adding values under 0
                 {
                     Console.WriteLine("You cannot use values under 0");
+
                     return;
                 }
             }
             catch (FormatException)
             {
                 Console.WriteLine("Please enter numbers only.");
+
                 return;
             }
-            catch (Exception)
+            catch (Exception) // this will execute if all other catches fail 
             {
                 Console.WriteLine("An error occurred.");
+
                 return;
             }
             finally
             {
+
                 Console.WriteLine("Returning to the menu system...");
+
             }
 
             
@@ -324,13 +334,17 @@ namespace ST10257503.PROG6221POEPart1
 
             foreach (Ingredient ingredient in ingredients)
             {
+
                 originalQuantities.Add(ingredient.Quantity); // adding to array list
+
             }
 
             /*
              the goal here is to scale the recipe, so the user will input a factor to scale by and it multiplies the original amout
              
+
              */
+
             foreach (Ingredient ingredient in ingredients)
             {
                 ingredient.Quantity *= fact;
@@ -338,11 +352,14 @@ namespace ST10257503.PROG6221POEPart1
 
             Console.WriteLine("Recipe scaled successfully!");
 
+
             Console.WriteLine(" ---------- Updated quantity of recipe ---------- ");
 
             foreach (var ingredient in ingredients)
             {
+
                 Console.WriteLine($"{ingredient.Quantity} of {ingredient.Name}"); // output quantity and name
+
             }
             Console.WriteLine(" ------------------------- ");
         }
@@ -351,7 +368,7 @@ namespace ST10257503.PROG6221POEPart1
 
             public void Reset()
             {
-            if (originalQuantities == null)
+            if (originalQuantities == null) 
             {
                 Console.WriteLine("Scale the recipe first before attempting to reset");
 
@@ -360,10 +377,10 @@ namespace ST10257503.PROG6221POEPart1
 
             for (int i = 0; i < ingredients.Count; i++)
             {
-                ingredients[i].Quantity = originalQuantities[i];
+                ingredients[i].Quantity = originalQuantities[i]; // This sets the values from the ingrident array to the original array values
             }
 
-            Console.WriteLine("Recipe quantities reset to their original values.");
+            Console.WriteLine("Recipe quantities reset to their original values."); // output once action is confirmed
 
         }
 

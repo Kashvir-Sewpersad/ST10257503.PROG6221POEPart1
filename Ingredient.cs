@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+//**************************************** start if file ************************************//
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace ST10257503.PROG6221POEPart1
 {
+    //***************************** start of ingredient class *******************************//
     public class Ingredient
     {
 
@@ -19,11 +23,16 @@ namespace ST10257503.PROG6221POEPart1
         public Ingredient(string name, double quantity, string unit , string addition )
         {
             Name = name;
+
             Quantity = quantity;
+
             Unit = unit;
+
             Addition = addition;
         }
     }
+
+    //***************************** end of ingredient class *******************************//
 
     public class Step { 
     
@@ -36,3 +45,5 @@ namespace ST10257503.PROG6221POEPart1
     
     }*/
 }
+
+//************************************* end of file ************************************//
