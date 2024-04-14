@@ -87,11 +87,11 @@ namespace ST10257503.PROG6221POEPart1
 
             //////////////////////////////// end of field declerations ////////////////////////////////// 
 
-            Console.WriteLine("welcome to the recipe app!!!");
+           
 
             Console.WriteLine(" This app works in grams (g)");
 
-            Console.WriteLine("follow the steps below ");
+            Console.WriteLine("Follow the Prompts  ");
 
 
 
@@ -264,7 +264,7 @@ namespace ST10257503.PROG6221POEPart1
 
         public void Scale()
         {
-            int fact;
+            double fact;
 
             // string updatedQuantities;
 
@@ -277,7 +277,7 @@ namespace ST10257503.PROG6221POEPart1
                     Console.WriteLine("Enter how much you want to scale the recipe by I.e 0.5, 2, 3 etc : ");
 
 
-                    fact = int.Parse(Console.ReadLine());
+                    fact = double.Parse(Console.ReadLine());
                     if (fact <= 0) {
                         Console.WriteLine("You cannot use values under 0");
                         return ;
