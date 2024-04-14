@@ -57,17 +57,17 @@ namespace ST10257503.PROG6221POEPart1
 
                 Console.WriteLine(" ------------- Menu system --------------- ");
              
-                Console.WriteLine("1.**** Make new recipe ****"); // This menu will display as soon as a user runs the program
+                Console.WriteLine("1.**** Make New Recipe ****"); // This menu will display as soon as a user runs the program
               
-                Console.WriteLine("2.**** Display a recipe ****");
+                Console.WriteLine("2.**** Display Recipe ****");
               
-                Console.WriteLine("3.**** Scale up or down a recipe ****");
+                Console.WriteLine("3.**** Scale Up or Down Recipe ****");
               
                 Console.WriteLine("4.**** Reset ****");
             
-                Console.WriteLine("5.**** Delete recipe ****");
+                Console.WriteLine("5.**** Delete Recipe ****");
             
-                Console.WriteLine("6.**** Exit menu ****");
+                Console.WriteLine("6.**** Exit Menu ****");
 
                 Console.WriteLine(" ----------------------------------------- ");
 
@@ -127,7 +127,7 @@ namespace ST10257503.PROG6221POEPart1
                         break;
 
                     default:
-                        Console.WriteLine("Your input is out of bounds (1-6)"); // I have added a default, however the try catch should have weeded out any issues by now
+                        Console.WriteLine("Your input is out of bounds (1-6)"); // I have added a default case, however the try catch should have weeded out any issues by now
                         break;
 
                        
