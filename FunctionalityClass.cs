@@ -276,6 +276,9 @@ namespace ST10257503.PROG6221POEPart1
 
 
                 fact = int.Parse(Console.ReadLine());
+                if (fact <= 0) {
+                    Console.WriteLine("You cannot use values under 0");
+                }
             }
             catch (FormatException e)
             {
