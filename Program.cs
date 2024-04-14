@@ -32,14 +32,17 @@ namespace ST10257503.PROG6221POEPart1
 
             FunctionalityClass fc = new FunctionalityClass(); // created a object of the functionality class
 
+
+            ///////////////// start of field declerations ////////////////////////
+            
             int choice; //choice variable created to be used for user input
 
-
+            //////////////// end of field declerations //////////////////////////
 
 
             Console.WriteLine(" Welcome to the Recipe App !!! ");
 
-            Console.WriteLine("We just need some information and we can get started");
+            Console.WriteLine("View the Menu below and choose an option");
 
             Console.WriteLine(" \n ");
 

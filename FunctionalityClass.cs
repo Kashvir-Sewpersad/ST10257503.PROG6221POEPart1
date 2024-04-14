@@ -21,11 +21,17 @@ namespace ST10257503.PROG6221POEPart1
      */
     internal class FunctionalityClass
     {
-        //****************************start of storage system ***********************//
+        //**************************** start of storage system ***********************//
 
-        private List<Ingredient> ingredients;
 
-        private List<string> steps;
+
+        private List<Ingredient> ingredients; // I have created an array list to store the ingredents
+
+        private List<string> steps; // Here I have created one to store the steps involed in the recipe
+
+        /*
+         side note, I should have created a seperate class for the steps, including getters and setters however for this case its not nessesary 
+         */
 
         //**************************** end of storage system ***********************//
 
@@ -63,27 +69,27 @@ namespace ST10257503.PROG6221POEPart1
 
             int stepCount; // This variable will be used to store how many steps in the recipe which will then be used in a loop
 
-            string step;
+            string step; // This variable will be used to store the step { text }
 
-            int ingredientNum;
+            int ingredientNum; // This variable will be used to store how many ingredients will be used per recipe 
 
-            string ingName;
+            string ingName; // This variable will be used to store the ingredient name
 
-            string additional;
+            string additional; // This variable will be used to store any additional ingredients 
 
-            string additionalYES = " ";
+            string additionalYES = " "; // I have declared and initialized this variable to nothing. It will be used in the event that there is any additional ingredients
 
-            string extraStep;
+            string extraStep; // This variable will be used to store any additional steps 
 
-            string extraStepYes = " ";
+            string extraStepYes = " "; // I have declared and initialized this variable to nothing. It will be used in the event that there is any additional steps
 
-            int ingredientQuantity;
+            int ingredientQuantity; // This variable will be used to store the quantity of ingridents 
 
-            string ingredientMeasurement;
+            string ingredientMeasurement; // This variable will be used to store the measurement
 
-            int i;
+            int i; // This variable will be used to increment a for loop to recive information based on how many ingridents we have
 
-            int x;
+            int x; // This variable will be used to increment a for loop for how many steps we have
 
             //////////////////////////////// end of field declerations ////////////////////////////////// 
 
@@ -99,57 +105,65 @@ namespace ST10257503.PROG6221POEPart1
 
 
 
-            try
+            try // try block to detect any errors on dangerous code
             {
 
-                Console.WriteLine("Enter how many ingridents will be used in this recipe : ");
+                Console.WriteLine("Enter how many ingridents will be used in this recipe : "); // Promt to user
 
-                ingredientNum = int.Parse(Console.ReadLine());
+                ingredientNum = int.Parse(Console.ReadLine()); // Input will be converted and store
 
 
             }
             catch (FormatException e)
             {
-                Console.WriteLine(" ENTER NUMBERS ONLY ");
+                Console.WriteLine(" ENTER NUMBERS ONLY "); // This catch block will execute if a format error occurs. That will come in the form of a user inputing letters
 
                 return;
             }
 
-
+            /*
+             for loop using the number of ingridents to increment and recive details such as quantity, name and measurement
+             */
             for (i = 0; i < ingredientNum; i++)
             {
-                Console.WriteLine($"Enter the name of ingredient {i + 1}: ");
+                Console.WriteLine($"Enter the name of ingredient {i + 1}: "); // Promt to user
 
-                ingName = Console.ReadLine();
+                ingName = Console.ReadLine(); // Variable will be stored 
 
-
+                /*
+                 This is volatile data as it is user input and not a string as such it has potential to crash the app. 
+                - For that reason alone i am adding a try catch block
+                 */
                 try
                 {
                     Console.WriteLine($"Enter the quantity for {ingName}: ");
 
-                    ingredientQuantity = int.Parse(Console.ReadLine());
+                    ingredientQuantity = int.Parse(Console.ReadLine()); // Variable will be screened, converted and stored 
                 }
                 catch (FormatException e) {
 
-                    Console.WriteLine("Please enter your answer in numerical notation");
+                    Console.WriteLine("Please enter your answer in numerical notation"); 
 
                     return;
                 }
 
 
-                Console.WriteLine($"Enter the measurement for the {ingName}: ");
+                Console.WriteLine($"Enter the measurement for the {ingName}: "); // prompt for a measurement
 
 
-                ingredientMeasurement = Console.ReadLine();
+                ingredientMeasurement = Console.ReadLine();  // Because C# accepts data as a string by default theres no need for exception handling here 
 
 
 
-
+                /*
+                 This is added in the event that something was forgotten
+                 */
                 Console.WriteLine($"Would you like to add anything extra? Enter 'yes' or 'no': ");
 
-                additional = Console.ReadLine();
+                additional = Console.ReadLine(); 
 
-                if (additional.ToLower() == "yes") {
+                if (additional.ToLower() == "yes") // if additional variable has a value of "yes" it will execute. anything else will be ignored
+                {
 
                     Console.WriteLine("Please enter any additional info here : ");
 
@@ -157,22 +171,27 @@ namespace ST10257503.PROG6221POEPart1
                 }
                 else {
 
-                    Console.WriteLine("No aditional information added ");
+                    Console.WriteLine("No aditional information added "); // This will output if the if statements conditions are not met
                 }
 
-                ingredients.Add(new Ingredient(ingName, ingredientQuantity, ingredientMeasurement, additionalYES));
+                ingredients.Add(new Ingredient(ingName, ingredientQuantity, ingredientMeasurement, additionalYES)); // All the aquired information is added to the arraylist 
             }
 
 
 
 
 
+            /*
+             We are now onto the steps part of it.I will use a try catch for any dangerous data
+             
+             */
+
             try
             {
 
-                Console.WriteLine("Enter the number of steps: ");
+                Console.WriteLine("Enter the number of steps: "); 
 
-                stepCount = int.Parse(Console.ReadLine());
+                stepCount = int.Parse(Console.ReadLine()); // Stored and converted if applicable
 
             }
             catch (FormatException e)
@@ -192,7 +211,7 @@ namespace ST10257503.PROG6221POEPart1
 
                 Console.WriteLine("would you like to add any other steps or final touches? Enter 'yes ' or 'no' ");
 
-                extraStep = Console.ReadLine();
+                extraStep = Console.ReadLine(); // This is included for any steps that have been missed
 
                 if (extraStep.ToLower() == "yes")
                 {
@@ -207,9 +226,9 @@ namespace ST10257503.PROG6221POEPart1
 
                 }
 
-                steps.Add(step);
+                steps.Add(step); // Here i am adding the steps to the array
 
-                steps.Add(extraStepYes);
+                steps.Add(extraStepYes); // same as above but for aditional steps 
             }
 
             Console.WriteLine("Details captured");
@@ -230,7 +249,7 @@ namespace ST10257503.PROG6221POEPart1
 
             Console.WriteLine("\n");
 
-            Console.WriteLine("First we have Ingredients");
+            Console.WriteLine(" *** Ingredients ***");
 
             Console.WriteLine("\n");
 
