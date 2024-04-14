@@ -28,7 +28,7 @@ namespace ST10257503.PROG6221POEPart1
         private List<Ingredient> ingredients; // I have created an array list to store the ingredents
 
         private List<string> steps; // Here I have created one to store the steps involed in the recipe
-
+        private List<double> originalQuantities;
         /*
          side note, I should have created a seperate class for the steps, including getters and setters however for this case its not nessesary 
          */
@@ -93,15 +93,10 @@ namespace ST10257503.PROG6221POEPart1
 
             //////////////////////////////// end of field declerations ////////////////////////////////// 
 
-           
-
-            Console.WriteLine(" This app works in grams (g)");
-
             Console.WriteLine("Follow the Prompts  ");
 
-
-
-
+            Console.WriteLine("All values must be added as grams");
+           
 
 
 
@@ -136,7 +131,7 @@ namespace ST10257503.PROG6221POEPart1
                  */
                 try
                 {
-                    Console.WriteLine($"Enter the quantity for {ingName}: ");
+                    Console.WriteLine($"Enter the quantity for {ingName} in grams (g): ");
 
                     ingredientQuantity = int.Parse(Console.ReadLine()); // Variable will be screened, converted and stored 
                 }
@@ -148,7 +143,7 @@ namespace ST10257503.PROG6221POEPart1
                 }
 
 
-                Console.WriteLine($"Enter the measurement for the {ingName}: "); // prompt for a measurement
+                Console.WriteLine($"Enter the measurement for the {ingName} in cups: "); // prompt for a measurement
 
 
                 ingredientMeasurement = Console.ReadLine();  // Because C# accepts data as a string by default theres no need for exception handling here 
@@ -179,8 +174,6 @@ namespace ST10257503.PROG6221POEPart1
 
 
 
-
-
             /*
              We are now onto the steps part of it.I will use a try catch for any dangerous data
              
@@ -203,7 +196,7 @@ namespace ST10257503.PROG6221POEPart1
 
 
 
-            for (x = 0; x < stepCount; x++)
+            for (x = 0; x < stepCount; x++) // itterating using stepcount as a limiting factor 
             {
                 Console.WriteLine($"Enter step {x + 1}: ");
 
@@ -242,6 +235,12 @@ namespace ST10257503.PROG6221POEPart1
 
 
         //********************************************** start of print out ****************************//
+        
+        /*
+         The purpose of this method is to display the information captured in the capture method
+        - neatness mmust be presant
+         */
+
         public void Print()
         {
 
@@ -249,13 +248,13 @@ namespace ST10257503.PROG6221POEPart1
 
             Console.WriteLine("\n");
 
-            Console.WriteLine(" *** Ingredients ***");
+            Console.WriteLine("---- Ingredients ----"); // header
 
             Console.WriteLine("\n");
 
             foreach (var ingredient in ingredients)
             {
-
+                // Output the ingredient values from the array 
                 Console.WriteLine($"{ingredient.Quantity} {ingredient.Unit} {ingredient.Addition} of {ingredient.Name} ");
 
 
@@ -263,7 +262,7 @@ namespace ST10257503.PROG6221POEPart1
 
             Console.WriteLine("\n");
 
-            Console.WriteLine(" ------------- Steps ----------------- ");
+            Console.WriteLine(" ------------- Steps ----------------- "); // header
 
             Console.WriteLine("\n");
 
@@ -271,7 +270,7 @@ namespace ST10257503.PROG6221POEPart1
             {
 
 
-                Console.WriteLine($" {y + 1}.   {steps[y]} ");
+                Console.WriteLine($" {y + 1}.   {steps[y]} "); // This will output the values from the steps array
 
 
             }
@@ -285,89 +284,81 @@ namespace ST10257503.PROG6221POEPart1
         {
             double fact;
 
-            // string updatedQuantities;
+            try
+            {
+                Console.WriteLine("Enter how much you want to scale the recipe by (e.g., 0.5, 2, 3, etc): ");
 
+                fact = double.Parse(Console.ReadLine()); // converting and storing user input 
 
-            
-
-                try
+                if (fact <= 0)
                 {
-
-                    Console.WriteLine("Enter how much you want to scale the recipe by I.e 0.5, 2, 3 etc : ");
-
-
-                    fact = double.Parse(Console.ReadLine());
-                    if (fact <= 0) {
-                        Console.WriteLine("You cannot use values under 0");
-                        return ;
-                    }
-                    
-                }
-
-
-                catch (FormatException e)
-                {
-
-                    Console.WriteLine("Enter numbers please");
+                    Console.WriteLine("You cannot use values under 0");
                     return;
-                }
-                catch (DivideByZeroException e)
-                {
-
-                    Console.WriteLine("you cannot divide by zero!");
-
-                    return;
-                }
-                catch (Exception e)
-                {
-
-                    Console.WriteLine("Theres been an error");
-                    return;
-                }
-                finally {
-
-                    Console.WriteLine("You will be relocated to the menu system ");
-
-                }
-
-
-
-
-
-                foreach (Ingredient ingredient in ingredients)
-
-                {
-
-                    ingredient.Quantity *= fact;
-
-                }
-
-
-
-                Console.WriteLine("Recipe scaled successfully!");
-
-
-
-                /* we will need to display the increased size of the recipe */
-
-                Console.WriteLine(" ---------- Updated  quantity of recipe ---------- ");
-
-                foreach (var ingredient in ingredients)
-                {
-
-                    Console.WriteLine($"{ingredient.Quantity * fact}  of {ingredient.Name} ");
-
-
                 }
             }
+            catch (FormatException)
+            {
+                Console.WriteLine("Please enter numbers only.");
+                return;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("An error occurred.");
+                return;
+            }
+            finally
+            {
+                Console.WriteLine("Returning to the menu system...");
+            }
+
+            
+            originalQuantities = new List<double>(); // creating an array list
+
+
+            foreach (Ingredient ingredient in ingredients)
+            {
+                originalQuantities.Add(ingredient.Quantity); // adding to array list
+            }
+
+            /*
+             the goal here is to scale the recipe, so the user will input a factor to scale by and it multiplies the original amout
+             
+             */
+            foreach (Ingredient ingredient in ingredients)
+            {
+                ingredient.Quantity *= fact;
+            }
+
+            Console.WriteLine("Recipe scaled successfully!");
+
+            Console.WriteLine(" ---------- Updated quantity of recipe ---------- ");
+
+            foreach (var ingredient in ingredients)
+            {
+                Console.WriteLine($"{ingredient.Quantity} of {ingredient.Name}"); // output quantity and name
+            }
+            Console.WriteLine(" ------------------------- ");
+        }
 
 
 
             public void Reset()
             {
+            if (originalQuantities == null)
+            {
+                Console.WriteLine("Scale the recipe first before attempting to reset");
 
-
+                return;
             }
+
+            for (int i = 0; i < ingredients.Count; i++)
+            {
+                ingredients[i].Quantity = originalQuantities[i];
+            }
+
+            Console.WriteLine("Recipe quantities reset to their original values.");
+
+        }
 
             public void Clear()
             {
