@@ -14,6 +14,26 @@ namespace ST10257503.PROG6221POEPart1
     /// 
     /// 
     /// 
+    /// ------------------------------------------ Required changes based on lecturer feedback ------------------------------------------- ///
+    /// 
+    /// 1) improved exception handling (with regards to null input) : IN PROGRESS
+    /// 
+    /// 2) Users need to be prompted to confirm that they would like to clear data   : CHECK
+    /// 
+    /// 3) readme requires additional data : IN PROGRESS
+    /// 
+    /// 4) The  system should be able to print in colour    : CHECK
+    /// 
+    /// 
+    /// 
+    /// 
+    /// 
+    /// 
+    /// ------------------------------------------ End of requiired changes -------------------------------------------------------------///
+    /// 
+    /// 
+    /// 
+    /// 
     /// </summary>
     /// 
 
@@ -65,8 +85,27 @@ namespace ST10257503.PROG6221POEPart1
          we will need to capture: name, quantity and quantity
          
          */
+        /// <summary>
+        /// 
+        /// </summary>
         public void Capture()
         {
+
+
+            //************************************************** start of alterations *******************************************//
+
+
+            string recipeName;
+
+
+
+
+
+
+
+            //************************************************** end of aalterations ***********************************************//
+
+
 
             /////////////////////////////// start of field declerations ////////////////////////////
 
@@ -99,7 +138,33 @@ namespace ST10257503.PROG6221POEPart1
             Console.WriteLine("Follow the Prompts  ");
 
             Console.WriteLine("All values must be added as grams");
-           
+
+
+            //************************  start of name addition and storage *****************************//
+
+            /*
+            As per the requirements of part 2 users must be able to add an ingrident name for each ingrident
+             */
+
+          //  try
+          //  {
+                Console.WriteLine("Please enter the recipe name : ");
+
+                recipeName = Console.ReadLine();
+
+
+           // }
+            
+            
+            
+          //  catch(Exception ex) 
+            
+           // {
+            
+            
+           // }
+
+            //***************************** end of name addition and storage ********************************//
 
 
 
@@ -248,36 +313,51 @@ namespace ST10257503.PROG6221POEPart1
 
         public void Print()
         {
-
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(" ----------- Recipe -------------  ");
+            Console.ResetColor();
+
 
             Console.WriteLine("\n");
 
+
+
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("---- Ingredients ----"); // header
+            Console.ResetColor();
+
 
             Console.WriteLine("\n");
 
             foreach (var ingredient in ingredients)
             {
+
+                Console.ForegroundColor = ConsoleColor.Green;
                 // Output the ingredient values from the array 
                 Console.WriteLine($"{ingredient.Quantity} {ingredient.Unit} {ingredient.Addition} of {ingredient.Name} ");
-
+                Console.ResetColor();
 
             }
 
             Console.WriteLine("\n");
 
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(" ------------- Steps ----------------- "); // header
+            Console.ResetColor();
+
+
 
             Console.WriteLine("\n");
 
             for (int y = 0; y < steps.Count; y++)
             {
-
+                Console.ForegroundColor = ConsoleColor.Blue;
 
                 Console.WriteLine($" {y + 1}.   {steps[y]} "); // This will output the values from the steps array
 
-
+                Console.ResetColor();
             }
         }
 
@@ -386,9 +466,60 @@ namespace ST10257503.PROG6221POEPart1
 
             public void Clear()
             {
-                ingredients.Clear();
+            //***************** start of field decclerations ********************//
 
-                steps.Clear();
+            string userChoice;
+
+            //***************** end of field declerations *******************//
+
+
+            try
+            {
+
+                Console.WriteLine("Are you sure you would like to clear this recipe ? "
+                    + "\n"
+                    + "1 for Yes "
+                    + "\n"
+                    + "2 for No");
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine($"An error occurred: {ex.Message}");
+
+            }
+
+            userChoice = Console.ReadLine();
+
+            switch (userChoice) 
+            {
+
+                case "1" :
+
+                    Console.WriteLine("This recipe will now be removed from the system ");
+
+                    ingredients.Clear();
+
+                    steps.Clear();
+
+                    break;
+            
+
+
+                    case "2" :
+
+                        Console.WriteLine("This recipe will remain unchanged");
+
+                        break;
+            
+                    default:
+
+                        Console.WriteLine("Whoops!!!! Theres been an Unforseen error ");
+
+                        break;
+                }
+                
             }
 
         }
