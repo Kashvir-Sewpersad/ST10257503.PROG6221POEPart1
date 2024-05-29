@@ -3,7 +3,7 @@
 # Kashvir Sewpersad ST10257503.PROG6221POEPart2
 
 # commit sample
-# commit sample screenshot
+# commit sample screenshot part 1
 ![Screenshot 2024-04-14 193252](https://github.com/Kashvir-Sewpersad/ST10257503.PROG6221POEPart1/assets/125659297/1b82b593-843f-45f0-92ca-6d0bfb90cf6f)
 
 # Refrences:
@@ -51,11 +51,19 @@ https://github.com/Kashvir-Sewpersad/ST10257503.PROG6221POEPart1.git
 
 
 //------------------------------ Changes ---------------------------//
+# Part 2 feedback based on lecturer
 Kashvir Sewpersad ST10257503
 
 I've improved my part one code in a few areas in response to my lecturer's comments. First, I improved the codebase's robustness by providing better exception handling throughout, which addressed inadequate error handling. In addition, I added color to the output system, which enhances visual clarity and adds interest to the interface. Additionally, by indenting the code, I've made it easier to read and maintain. To improve user experience and make interactions more friendly, I've also incorporated a personalized greeting for users. Even while the code isn't perfect, these improvements show that it has come a long way in terms of quality and usefulness. Lastly, I'm trying to make the ReadMe documentation better so that users may find more precise assistance and instructions. I believe to have addressed my shortcomings with regards to the requirements based on the above mentioned details.
 
 //----------------------------------------------------------------------//
+
+//------------------------- Part 2 screenshots -----------------------------//
+# commit sample screenshot part 2
+![1](https://github.com/Kashvir-Sewpersad/ST10257503.PROG6221POEPart1/assets/125659297/d644784f-58b7-4a30-bddb-2efd1354070c)
+
+
+![2](https://github.com/Kashvir-Sewpersad/ST10257503.PROG6221POEPart1/assets/125659297/dfda6625-5def-4cb7-9acd-7ffddfbf42ba)
 
 
 
