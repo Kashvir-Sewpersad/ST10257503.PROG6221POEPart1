@@ -21,6 +21,9 @@ namespace ST10257503.PROG6221POEPart1
      /// T. (2018, February 5). C# - Arrays. YouTube. https://www.youtube.com/watch?v=daFdTssjm3w
      /// E. T. (2018, November 28). 22. C# - ArrayLists. YouTube. https://www.youtube.com/watch?v=1zQLRK_YCt8
      /// G. A. (2017, November 8). Switch Statements | C# | Tutorial 17. YouTube. https://www.youtube.com/watch?v=Te43aPhxycs
+     /// Dotnet-Bot. (n.d.). Dictionary Class (System.Collections.Generic). Microsoft Learn. https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2?view=net-8.0
+     /// BillWagner. (2024, May 17). Lambda expressions - Lambda expressions and anonymous functions - C# reference. Microsoft Learn. https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/lambda-expressions
+     /// Execute Automation. (2016, July 12). Part 14 - Working with Generic Collections in C# [Video]. YouTube. https://www.youtube.com/watch?v=F8MhfLWX_O8
      /// 
      /// </summary>
      /// <param name="args"></param>
