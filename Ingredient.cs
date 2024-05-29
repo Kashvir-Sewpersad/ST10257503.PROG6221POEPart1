@@ -14,22 +14,27 @@ namespace ST10257503.PROG6221POEPart1
     public class Ingredient
     {
 
-        public string Name { get; set; }
-        public double Quantity { get; set; }
-        public string Unit { get; set; }
+        public string Name { get; set; } // name getter and setter
+        public double Quantity { get; set; } // quantity (grams) getter and setter
+        public string Unit { get; set; } // units getter and setter (cups)
 
 
-        public string Addition { get; set; }
+        public string Addition { get; set; } // getter and setter for any added process
 
 
         //--------------------- updates ----------------------------//
+        /*
+         as per the poe we need to store calories and food groups
+         
+         */
+        public int Calories { get; set; } // calorie getter + setter 
+        public string FoodGroup { get; set; } // food group getter and setter
 
-        public int Calories { get; set; }
-        public string FoodGroup { get; set; }
+        //-----------------------------------------------------------------------
 
-
-
-
+        /*
+         Updated to accept the calories and food groups
+         */
         public Ingredient(string name, double quantity, string unit, string addition, int calories, string foodGroup)
         {
             Name = name;
@@ -42,9 +47,9 @@ namespace ST10257503.PROG6221POEPart1
 
             //-----------------------------------------------------//
 
-            Calories = calories;
+            Calories = calories; // added
 
-            FoodGroup = foodGroup;
+            FoodGroup = foodGroup; // added
         }
     }
 
@@ -56,11 +61,7 @@ namespace ST10257503.PROG6221POEPart1
         public string Steps { get; set; }
         public string additionSteps { get; set; }
     }
-    /*  public steps1(string Ad  , string x)
-      {
-          additionSteps = Ad;
-
-      }*/
+   
 }
 
 //************************************* end of file ************************************//
