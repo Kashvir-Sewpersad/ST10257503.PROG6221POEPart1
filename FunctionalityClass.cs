@@ -396,7 +396,7 @@ namespace ST10257503.PROG6221POEPart1
 
             if (recipe.TotalCalories > 300)
             {
-                OnCaloriesExceeded?.Invoke(recipeName);
+                OnCaloriesExceeded?.Invoke(recipeName); // delegate
             }
 
 
@@ -421,32 +421,32 @@ namespace ST10257503.PROG6221POEPart1
         {
 
             Console.WriteLine("Recipes: ");
-            foreach (var recipe in recipes.Values.OrderBy(r => r.Name))
+            foreach (var recipe in recipes.Values.OrderBy(r => r.Name)) // im using a lamda to sort and produce recipes in alphebetical order 
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine($"- {recipe.Name}");
+                Console.WriteLine($"- {recipe.Name}"); // output recipe names stored 
                 Console.ResetColor();
             }
         }
 
         public void DisplayRecipe(string recipeName)
         {
-            if (recipes.ContainsKey(recipeName))
+            if (recipes.ContainsKey(recipeName)) // looking for recipes with same name 
             {
                 Recipe recipe = recipes[recipeName];
                 Console.WriteLine($"Recipe: {recipe.Name}");
                 Console.WriteLine("Ingredients:");
-                foreach (var ingredient in recipe.Ingredients)
+                foreach (var ingredient in recipe.Ingredients) // looping through ingridents 
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($" {ingredient.Name} {ingredient.Quantity + " Grams (g) "} {ingredient.Unit + " Cups "}   ({ingredient.Calories} calories, {ingredient.FoodGroup})");
+                    Console.WriteLine($" {ingredient.Name} {ingredient.Quantity + " Grams (g) "} {ingredient.Unit + " Cups "}   ({ingredient.Calories} calories, {ingredient.FoodGroup})"); // displaying the values stored in it 
                     Console.ResetColor();
                 }
                 Console.WriteLine("Steps:");
                 for (int i = 0; i < recipe.Steps.Count; i++)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"{i + 1}. {recipe.Steps[i]}");
+                    Console.WriteLine($"{i + 1}. {recipe.Steps[i]}"); // outputing the steps 
                     Console.ResetColor();
                 }
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -598,7 +598,7 @@ namespace ST10257503.PROG6221POEPart1
 
                 case "1":
 
-                    Console.WriteLine("This recipe will now be removed from the system ");
+                    Console.WriteLine("This recipe will now be removed from the system "); // added as per lecturer feedback
 
                     ingredients.Clear();
 
@@ -623,16 +623,24 @@ namespace ST10257503.PROG6221POEPart1
 
         }
 
-
+        /*
+         
+         
+         So i decided to add this in so users know what ingridents fall into which category
+         It is set to display in color 
+         It is called in the main method
+         
+         
+         */
         public void Mesasge()
         {
 
-            Console.WriteLine("Please Enter Your Name : ");
+            Console.WriteLine("Please Enter Your Name : "); // prompt for user name
             String FirstName = Console.ReadLine();
 
             Console.WriteLine("\n");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Welcome " + FirstName);
+            Console.WriteLine("Welcome " + FirstName); // output name 
             Console.ResetColor();
             Console.WriteLine("\n");
 
