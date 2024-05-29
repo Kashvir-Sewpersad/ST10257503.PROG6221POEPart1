@@ -157,20 +157,10 @@ namespace ST10257503.PROG6221POEPart1
                         Console.WriteLine("Your input is out of bounds (1-7)"); // This will display if a user enters a number out of what was allowed. 
                         break;
                 }
-
-
             }
-
-
         }
-
-
-
-
     }
-
     //******************* end of main method ******************************************//
-
 }
 
 

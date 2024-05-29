@@ -11,10 +11,9 @@ namespace ST10257503.PROG6221POEPart1
     public class Recipe
     {
 
-
-        public string Name { get; set; }
-        public List<Ingredient> Ingredients { get; set; }
-        public List<string> Steps { get; set; }
+        public string Name { get; set; } // getter and setter for name
+        public List<Ingredient> Ingredients { get; set; } // getter and setter for ingrident list values
+        public List<string> Steps { get; set; } // getter and setter for steps list values/ data
 
 
         /*
@@ -24,7 +23,7 @@ namespace ST10257503.PROG6221POEPart1
 
         public int TotalCalories
         {
-            get { return Ingredients.Sum(ingredient => ingredient.Calories); }
+            get { return Ingredients.Sum(ingredient => ingredient.Calories); } // getting  the data stored returning the sum of its parts 
         }
 
 
