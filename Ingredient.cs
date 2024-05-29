@@ -24,13 +24,13 @@ namespace ST10257503.PROG6221POEPart1
 
         //--------------------- updates ----------------------------//
 
-        public int Calories { get; set; } 
-        public string FoodGroup { get; set; } 
+        public int Calories { get; set; }
+        public string FoodGroup { get; set; }
 
 
 
 
-        public Ingredient(string name, double quantity, string unit , string addition, int calories, string foodGroup)
+        public Ingredient(string name, double quantity, string unit, string addition, int calories, string foodGroup)
         {
             Name = name;
 
@@ -50,16 +50,17 @@ namespace ST10257503.PROG6221POEPart1
 
     //***************************** end of ingredient class *******************************//
 
-    public class Step { 
-    
-    public string Steps { get; set; }
+    public class Step
+    {
+
+        public string Steps { get; set; }
         public string additionSteps { get; set; }
     }
-  /*  public steps1(string Ad  , string x)
-    {
-        additionSteps = Ad;
-    
-    }*/
+    /*  public steps1(string Ad  , string x)
+      {
+          additionSteps = Ad;
+
+      }*/
 }
 
 //************************************* end of file ************************************//

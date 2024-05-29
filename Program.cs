@@ -59,9 +59,11 @@ namespace ST10257503.PROG6221POEPart1
 
             int choice; //choice variable created to be used for user input
 
+
             //////////////// end of field declerations //////////////////////////
 
             Console.WriteLine("\n");
+
             Console.WriteLine(" Welcome to the Recipe App !!! ");
 
             Console.WriteLine("View the Menu below and choose an option");
@@ -76,7 +78,7 @@ namespace ST10257503.PROG6221POEPart1
              
              */
 
-          
+
 
 
             while (true)
@@ -107,22 +109,22 @@ namespace ST10257503.PROG6221POEPart1
                 {
                     Console.WriteLine("Enter corresponding number "); // Prompt to user to select a number from the menu 
 
-                     choice = int.Parse(Console.ReadLine()); // The input is stored in the choice variable and is being analysed by the try block
+                    choice = int.Parse(Console.ReadLine()); // The input is stored in the choice variable and is being analysed by the try block
 
                 }
                 /*
                  This catch block is set up to catch out a user trying to break the program. FormatException is trying to see if letters or words were entered instead of intergers
                  */
-                catch(FormatException e)
+                catch (FormatException e)
                 {
-                    Console.WriteLine("You seem to have made a mistake" + e.Message );
+                    Console.WriteLine("You seem to have made a mistake" + e.Message);
                     Console.WriteLine("\n");
                     Console.WriteLine("Enter only numbers "); // This will display if a format error was encountered
                     Console.WriteLine("\n");
                     //  return;
                     continue; // Im using continue because i want the program to loop back in the event of a error. return ends the program
 
-               }
+                }
                 /*
                  Based on the user input which has by now passed the try catch block and should be free from errors. We will now pass the user input stored in the choice variable to the switch statement
                  */
@@ -155,21 +157,21 @@ namespace ST10257503.PROG6221POEPart1
                         Console.WriteLine("Your input is out of bounds (1-7)");
                         break;
                 }
-            
-       
+
+
+            }
+
+
         }
+
+
 
 
     }
 
-           
+    //******************* end of main method ******************************************//
 
-
-        }
-        
-        //******************* end of main method ******************************************//
-
-    }
+}
 
 
 //******************************** end of file ***************************************//

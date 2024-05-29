@@ -28,12 +28,6 @@ namespace ST10257503.PROG6221POEPart1
         }
 
 
-
-
-
-
-
-
         public Recipe(string name)
         {
             Name = name;
@@ -50,9 +44,6 @@ namespace ST10257503.PROG6221POEPart1
         {
             Steps.Add(step);
         }
-
-
-
 
     }
 }

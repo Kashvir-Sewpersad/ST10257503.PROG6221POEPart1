@@ -52,11 +52,11 @@ namespace ST10257503.PROG6221POEPart1
 
 
 
-         public List<Ingredient> ingredients; // I have created an array list to store the ingredents
+        public List<Ingredient> ingredients; // I have created an array list to store the ingredents
 
-         public List<string> steps; // Here I have created one to store the steps involed in the recipe
+        public List<string> steps; // Here I have created one to store the steps involed in the recipe
 
-         public List<double> originalQuantities;
+        public List<double> originalQuantities;
 
 
         public Dictionary<string, Recipe> recipes;
@@ -82,9 +82,9 @@ namespace ST10257503.PROG6221POEPart1
         //******************************* start of constructor ***********************//
         public FunctionalityClass()
         {
-              ingredients = new List<Ingredient>();
+            ingredients = new List<Ingredient>();
 
-             steps = new List<string>();
+            steps = new List<string>();
 
             recipes = new Dictionary<string, Recipe>();
         }
@@ -164,10 +164,10 @@ namespace ST10257503.PROG6221POEPart1
              */
 
 
-        
-                Console.WriteLine("Please enter the recipe name : ");
 
-                recipeName = Console.ReadLine();
+            Console.WriteLine("Please enter the recipe name : ");
+
+            recipeName = Console.ReadLine();
 
 
 
@@ -221,9 +221,10 @@ namespace ST10257503.PROG6221POEPart1
 
                     ingredientQuantity = int.Parse(Console.ReadLine()); // Variable will be screened, converted and stored 
                 }
-                catch (FormatException e) {
+                catch (FormatException e)
+                {
                     Console.WriteLine("You seem to have made a mistake" + e.Message);
-                    Console.WriteLine("Please enter your answer in numerical notation"); 
+                    Console.WriteLine("Please enter your answer in numerical notation");
 
                     return;
                 }
@@ -245,14 +246,15 @@ namespace ST10257503.PROG6221POEPart1
                 {
                     Console.WriteLine("Input is too large. Please enter a smaller number.");
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     Console.WriteLine("You seem to have made a mistake" + e.Message);
                 }
-                
+
 
                 calories = int.Parse(Console.ReadLine());
 
-                if (calories >= 300) 
+                if (calories >= 300)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"Warning: The recipe '{recipeName}' exceeds 300 calories.");
@@ -261,12 +263,12 @@ namespace ST10257503.PROG6221POEPart1
                     Console.WriteLine("Would you like to reduce the calories Yes or No");
                     string alter = Console.ReadLine();
 
-                            if (alter.ToLower() == "yes") 
-                            {
-                                Console.WriteLine($"Enter the number of calories for {ingName}: ");
-                                calories = int.Parse(Console.ReadLine());
+                    if (alter.ToLower() == "yes")
+                    {
+                        Console.WriteLine($"Enter the number of calories for {ingName}: ");
+                        calories = int.Parse(Console.ReadLine());
 
-                            }
+                    }
 
                 }
 
@@ -274,7 +276,7 @@ namespace ST10257503.PROG6221POEPart1
 
                 Console.WriteLine($"Enter the food group for {ingName}: ");
 
-                 foodGroup = Console.ReadLine();
+                foodGroup = Console.ReadLine();
 
 
 
@@ -292,7 +294,7 @@ namespace ST10257503.PROG6221POEPart1
                  */
                 Console.WriteLine($"Would you like to add anything extra? Enter 'yes' or 'no': ");
 
-                additional = Console.ReadLine(); 
+                additional = Console.ReadLine();
 
                 if (additional.ToLower() == "yes") // if additional variable has a value of "yes" it will execute. anything else will be ignored
                 {
@@ -301,7 +303,8 @@ namespace ST10257503.PROG6221POEPart1
 
                     additionalYES = Console.ReadLine();
                 }
-                else {
+                else
+                {
 
                     Console.WriteLine("No aditional information added "); // This will output if the if statements conditions are not met
                 }
@@ -331,7 +334,7 @@ namespace ST10257503.PROG6221POEPart1
             try
             {
 
-                Console.WriteLine("Enter the number of steps: "); 
+                Console.WriteLine("Enter the number of steps: ");
 
                 stepCount = int.Parse(Console.ReadLine()); // Stored and converted if applicable
 
@@ -365,7 +368,8 @@ namespace ST10257503.PROG6221POEPart1
 
                     extraStepYes = Console.ReadLine();
                 }
-                else {
+                else
+                {
 
                     Console.WriteLine("no additional steps ");
 
@@ -403,7 +407,7 @@ namespace ST10257503.PROG6221POEPart1
 
 
         //********************************************** start of print out ****************************//
-        
+
         /*
          The purpose of this method is to display the information captured in the capture method
         - neatness mmust be presant
@@ -411,7 +415,7 @@ namespace ST10257503.PROG6221POEPart1
 
         public void Print()
         {
-            
+
             Console.WriteLine("Recipes: ");
             foreach (var recipe in recipes.Values.OrderBy(r => r.Name))
             {
@@ -462,7 +466,7 @@ namespace ST10257503.PROG6221POEPart1
 
             try
             {
-                
+
                 Console.WriteLine("Enter how much you want to scale the recipe by (e.g., 0.5, 2, 3, etc): ");
                 //  Console.WriteLine("Ensure to use a comma ( , ) if scaling up or down by a fraction");
 
@@ -471,7 +475,7 @@ namespace ST10257503.PROG6221POEPart1
                  .Replace('.' , ',') needed to be added. the program would not read a ' . ' and jumpp straight into the catch block when scaling up or down with a fraction
                  
                  */
-                fact = double.Parse(Console.ReadLine().Replace('.' , ',')    ); // converting and storing user input 
+                fact = double.Parse(Console.ReadLine().Replace('.', ',')); // converting and storing user input 
 
                 if (fact <= 0) // This prevents users from adding values under 0
                 {
@@ -481,17 +485,17 @@ namespace ST10257503.PROG6221POEPart1
                 }
             }
             catch (FormatException)
-                {
-                    Console.WriteLine("Please enter numbers only.");
+            {
+                Console.WriteLine("Please enter numbers only.");
 
-                    return;
-                }
-                    catch (Exception) // this will execute if all other catches fail 
-                    {
-                        Console.WriteLine("An error occurred.");
+                return;
+            }
+            catch (Exception) // this will execute if all other catches fail 
+            {
+                Console.WriteLine("An error occurred.");
 
-                        return;
-                    }
+                return;
+            }
             finally
             {
 
@@ -499,7 +503,7 @@ namespace ST10257503.PROG6221POEPart1
 
             }
 
-            
+
             originalQuantities = new List<double>(); // creating an array list
 
 
@@ -519,7 +523,7 @@ namespace ST10257503.PROG6221POEPart1
             foreach (Ingredient ingredient in ingredients)
             {
                 ingredient.Quantity *= fact;
-               // ingredient.Unit *= fact; 
+                // ingredient.Unit *= fact; 
             }
 
             Console.WriteLine("Recipe scaled successfully!");
@@ -539,9 +543,9 @@ namespace ST10257503.PROG6221POEPart1
 
 
 
-            public void Reset()
-            {
-            if (originalQuantities == null) 
+        public void Reset()
+        {
+            if (originalQuantities == null)
             {
                 Console.WriteLine("Scale the recipe first before attempting to reset");
 
@@ -557,8 +561,8 @@ namespace ST10257503.PROG6221POEPart1
 
         }
 
-            public void Clear()
-            {
+        public void Clear()
+        {
             //***************** start of field decclerations ********************//
 
             string userChoice;
@@ -585,10 +589,10 @@ namespace ST10257503.PROG6221POEPart1
 
             userChoice = Console.ReadLine();
 
-            switch (userChoice) 
+            switch (userChoice)
             {
 
-                case "1" :
+                case "1":
 
                     Console.WriteLine("This recipe will now be removed from the system ");
 
@@ -597,89 +601,90 @@ namespace ST10257503.PROG6221POEPart1
                     steps.Clear();
 
                     break;
-            
 
 
-                    case "2" :
 
-                        Console.WriteLine("This recipe will remain unchanged");
+                case "2":
 
-                        break;
-            
-                    default:
+                    Console.WriteLine("This recipe will remain unchanged");
 
-                        Console.WriteLine("Whoops!!!! Theres been an Unforseen error ");
+                    break;
 
-                        break;
-                }
-                
+                default:
+
+                    Console.WriteLine("Whoops!!!! Theres been an Unforseen error ");
+
+                    break;
             }
 
-
-        public void Mesasge() {
-
-                 Console.WriteLine("Please Enter Your Name : ");
-                String FirstName = Console.ReadLine();
-
-                Console.WriteLine("\n");
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Welcome " + FirstName);
-                Console.ResetColor();
-                Console.WriteLine("\n");
-
-                Console.WriteLine("This Is A Recipe App So Heres A Quick Brief On The 7 Food Groups");
-
-
-                Console.WriteLine("\n");
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("1.Fruits");
-                Console.WriteLine("Rich in vitamins, minerals , fiber, and antioxidants. Fruits are healty but can have a lot of calories");
-                Console.ResetColor();
-
-
-                Console.WriteLine("\n");
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine("2.Vegetables");
-                Console.WriteLine("High in vitamins , minerals (iron,  magnesium), fiber, and antioxidants. These are generally lower in calories than fruit");
-                Console.ResetColor();
-
-
-                Console.WriteLine("\n");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("3.Grains");
-                Console.WriteLine("Provides carbs, fiber, B vitamins, iron and magnesium. These can be good in moderation Commonly found in items in the forms of seeds");
-                Console.ResetColor();
-
-
-                Console.WriteLine("\n");
-                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                Console.WriteLine("4.Protein");
-                Console.WriteLine("Rich in protein, B vitamins B12, iron, zinc, and essential fatty acids. This is a building block and should be consumed in moderation.Commonly found in items such as meat or beans");
-                Console.ResetColor();
-
-
-                Console.WriteLine("\n");
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("5.Dairy");
-                Console.WriteLine("High in calcium, Whey protein, vitamin D, and other essential nutrients like  potassium.Commonly found in milk products like Cheese");
-                Console.ResetColor();
-
-                Console.WriteLine("\n");
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("6.Oils and Fat");
-                Console.WriteLine("Provide essential fatty acids, vitamin E, and energy.These aid in absorbsion of nutrients. Fat and oils are found in all organic matter");
-                Console.ResetColor();
-
-                Console.WriteLine("\n");
-                Console.ForegroundColor = ConsoleColor.DarkBlue;
-                Console.WriteLine("7.Sweets and Sugars");
-                Console.WriteLine("While not essential, they can provide quick energy. However, consumption should be limited due to potential negative health effects. These are high in calories");
-                Console.ResetColor();
-                Console.WriteLine("\n");
         }
 
+
+        public void Mesasge()
+        {
+
+            Console.WriteLine("Please Enter Your Name : ");
+            String FirstName = Console.ReadLine();
+
+            Console.WriteLine("\n");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Welcome " + FirstName);
+            Console.ResetColor();
+            Console.WriteLine("\n");
+
+            Console.WriteLine("This Is A Recipe App So Heres A Quick Brief On The 7 Food Groups");
+
+
+            Console.WriteLine("\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("1.Fruits");
+            Console.WriteLine("Rich in vitamins, minerals , fiber, and antioxidants. Fruits are healty but can have a lot of calories");
+            Console.ResetColor();
+
+
+            Console.WriteLine("\n");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("2.Vegetables");
+            Console.WriteLine("High in vitamins , minerals (iron,  magnesium), fiber, and antioxidants. These are generally lower in calories than fruit");
+            Console.ResetColor();
+
+
+            Console.WriteLine("\n");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("3.Grains");
+            Console.WriteLine("Provides carbs, fiber, B vitamins, iron and magnesium. These can be good in moderation Commonly found in items in the forms of seeds");
+            Console.ResetColor();
+
+
+            Console.WriteLine("\n");
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine("4.Protein");
+            Console.WriteLine("Rich in protein, B vitamins B12, iron, zinc, and essential fatty acids. This is a building block and should be consumed in moderation.Commonly found in items such as meat or beans");
+            Console.ResetColor();
+
+
+            Console.WriteLine("\n");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("5.Dairy");
+            Console.WriteLine("High in calcium, Whey protein, vitamin D, and other essential nutrients like  potassium.Commonly found in milk products like Cheese");
+            Console.ResetColor();
+
+            Console.WriteLine("\n");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("6.Oils and Fat");
+            Console.WriteLine("Provide essential fatty acids, vitamin E, and energy.These aid in absorbsion of nutrients. Fat and oils are found in all organic matter");
+            Console.ResetColor();
+
+            Console.WriteLine("\n");
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine("7.Sweets and Sugars");
+            Console.WriteLine("While not essential, they can provide quick energy. However, consumption should be limited due to potential negative health effects. These are high in calories");
+            Console.ResetColor();
+            Console.WriteLine("\n");
         }
-   
+
     }
+
+}
 
 //******************************************** end of file *************************************************//
