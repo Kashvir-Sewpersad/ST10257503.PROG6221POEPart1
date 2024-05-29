@@ -84,11 +84,11 @@ namespace ST10257503.PROG6221POEPart1
             while (true)
             {
                 Console.WriteLine("\n");
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Red; // This sets the text color to red
                 Console.WriteLine("------------- Menu system ---------------");
-                Console.ResetColor();
+                Console.ResetColor(); // This reverts it back to default 
                 Console.WriteLine("1. Make New Recipe");
-                Console.WriteLine("2. Display List of Recipes");
+                Console.WriteLine("2. Display List of Recipes"); // I added this to display the list of recipes
                 Console.WriteLine("3. Display Recipe");
                 Console.WriteLine("4. Scale Up or Down Recipe");
                 Console.WriteLine("5. Reset");
@@ -131,30 +131,30 @@ namespace ST10257503.PROG6221POEPart1
                 switch (choice)
                 {
                     case 1:
-                        fc.Capture();
+                        fc.Capture(); // Call to capture method
                         break;
                     case 2:
-                        fc.Print();
+                        fc.Print(); //  Call to print method
                         break;
                     case 3:
                         Console.WriteLine("Enter the recipe name to display: ");
                         string recipeName = Console.ReadLine();
-                        fc.DisplayRecipe(recipeName);
+                        fc.DisplayRecipe(recipeName); // call to display method
                         break;
                     case 4:
-                        fc.Scale();
+                        fc.Scale(); // Call to scale method
                         break;
                     case 5:
-                        fc.Reset();
+                        fc.Reset(); // call to reset method
                         break;
                     case 6:
-                        fc.Clear();
+                        fc.Clear(); // call to clear method
                         break;
                     case 7:
-                        Environment.Exit(0);
+                        Environment.Exit(0); // This is a more elegant way to close a programm as per our standed "crash it" 
                         break;
                     default:
-                        Console.WriteLine("Your input is out of bounds (1-7)");
+                        Console.WriteLine("Your input is out of bounds (1-7)"); // This will display if a user enters a number out of what was allowed. 
                         break;
                 }
 
