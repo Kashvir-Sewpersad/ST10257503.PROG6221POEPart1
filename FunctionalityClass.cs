@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -18,7 +19,7 @@ namespace ST10257503.PROG6221POEPart1
     /// ------------------------------------------ Required changes based on lecturer feedback ------------------------------------------- ///
     /// 
     /// 
-    /// 1) improved exception handling (with regards to null input) : IN PROGRESS
+    /// 1) improved exception handling (with regards to null input) : trying 
     /// 
     /// 2) Users need to be prompted to confirm that they would like to clear data   : CHECK
     /// 
@@ -56,10 +57,10 @@ namespace ST10257503.PROG6221POEPart1
 
         public List<string> steps; // Here I have created one to store the steps involed in the recipe
 
-        public List<double> originalQuantities;
+        public List<double> originalQuantities; // This is to store the original values so when we update via scale we still have the originals to work with
 
 
-        public Dictionary<string, Recipe> recipes;
+        public Dictionary<string, Recipe> recipes; // i have created a dictonary of type string to store the recipes. This will allow us later to display in aphabetical order 
 
         // Delegate for notification
         public delegate void CaloriesExceededHandler(string recipeName);
@@ -82,11 +83,11 @@ namespace ST10257503.PROG6221POEPart1
         //******************************* start of constructor ***********************//
         public FunctionalityClass()
         {
-            ingredients = new List<Ingredient>();
+            ingredients = new List<Ingredient>(); // created a instance for Ingrident
 
-            steps = new List<string>();
+            steps = new List<string>(); // Craeted an instance for steps
 
-            recipes = new Dictionary<string, Recipe>();
+            recipes = new Dictionary<string, Recipe>(); // created an instance for recipe
         }
 
         //******************************* end of constructor ***********************//
@@ -112,15 +113,16 @@ namespace ST10257503.PROG6221POEPart1
             //************************************************** start of alterations *******************************************//
 
 
-            string recipeName;
+            string recipeName; // Added a variable type string to store the name 
 
 
-            int calories;
+            int calories; // created a variable type interger to store the calories. I was going to go double or float, seemed excessive 
 
-            string foodGroup;
+            string foodGroup; // created a variable type string to store the food groups
 
 
-            //************************************************** end of aalterations ***********************************************//
+
+            //************************************************** end of alterations ***********************************************//
 
 
 
@@ -151,7 +153,7 @@ namespace ST10257503.PROG6221POEPart1
             int x; // This variable will be used to increment a for loop for how many steps we have
 
             //////////////////////////////// end of field declerations ////////////////////////////////// 
-
+            Console.WriteLine("\n");
             Console.WriteLine("Follow the Prompts  ");
 
             Console.WriteLine("All values must be added as grams");
@@ -165,9 +167,9 @@ namespace ST10257503.PROG6221POEPart1
 
 
 
-            Console.WriteLine("Please enter the recipe name : ");
+            Console.WriteLine("Please enter the recipe name : "); // prompt for recipe name. I have left out exception handling here because it seems to restrictive on users
 
-            recipeName = Console.ReadLine();
+            recipeName = Console.ReadLine(); 
 
 
 
@@ -175,13 +177,13 @@ namespace ST10257503.PROG6221POEPart1
 
 
 
-            if (recipes.ContainsKey(recipeName))
+            if (recipes.ContainsKey(recipeName)) // soooooooooo what im doing here is checking the recipe dictionary to see if theres a recipe with the same name 
             {
-                Console.WriteLine("Recipe already exists. Please enter a unique name.");
+                Console.WriteLine("Recipe already exists. Please enter a unique name."); // if there is a recipe with the same name the user will be notified
                 return;
             }
 
-            Recipe recipe = new Recipe(recipeName);
+            Recipe recipe = new Recipe(recipeName); //  creating an instance of Recipe ()
 
 
 
@@ -196,7 +198,9 @@ namespace ST10257503.PROG6221POEPart1
             }
             catch (FormatException e)
             {
-                Console.WriteLine("You seem to have made a mistake" + e.Message);
+                Console.WriteLine("You seem to have made a mistake" + e.Message); // SO taking mr.Kims advice i have improved my exceptionhandling by displaying the error message
+
+
                 Console.WriteLine(" ENTER NUMBERS ONLY "); // This catch block will execute if a format error occurs. That will come in the form of a user inputing letters
 
                 return;
@@ -217,14 +221,14 @@ namespace ST10257503.PROG6221POEPart1
                  */
                 try
                 {
-                    Console.WriteLine($"Enter the quantity for {ingName} in grams (g): ");
+                    Console.WriteLine($"Enter the quantity for {ingName} in grams (g): "); // prompt 
 
                     ingredientQuantity = int.Parse(Console.ReadLine()); // Variable will be screened, converted and stored 
                 }
                 catch (FormatException e)
                 {
-                    Console.WriteLine("You seem to have made a mistake" + e.Message);
-                    Console.WriteLine("Please enter your answer in numerical notation");
+                    Console.WriteLine("You seem to have made a mistake" + e.Message); // display of exception encountered 
+                    Console.WriteLine("Please enter your answer in numerical notation"); // output message 
 
                     return;
                 }
@@ -235,14 +239,14 @@ namespace ST10257503.PROG6221POEPart1
 
                 try
                 {
-                    Console.WriteLine($"Enter the number of calories for {ingName}: ");
+                    Console.WriteLine($"Enter the number of calories for {ingName}: "); // testing user input for calories 
 
                 }
                 catch (FormatException)
                 {
                     Console.WriteLine("Invalid. Please enter a  number.");
                 }
-                catch (OverflowException)
+                catch (OverflowException) // so for my calories i set it ass interger which is from -2,147,483,648 to 2,147,483,647 . if that value is exceeded the code can break which is why i have overflow
                 {
                     Console.WriteLine("Input is too large. Please enter a smaller number.");
                 }
@@ -256,17 +260,17 @@ namespace ST10257503.PROG6221POEPart1
 
                 if (calories >= 300)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"Warning: The recipe '{recipeName}' exceeds 300 calories.");
-                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.Red; // set to red
+                    Console.WriteLine($"Warning: The recipe '{recipeName}' exceeds 300 calories."); // output if calories are over 300 in red to signify danger 
+                    Console.ResetColor(); // back to default
                     Console.WriteLine("You may want to reduce portion size or remove item");
-                    Console.WriteLine("Would you like to reduce the calories Yes or No");
+                    Console.WriteLine("Would you like to reduce the calories Yes or No"); // i am giving the user the ability to re enter their value through a s series of nested if staements 
                     string alter = Console.ReadLine();
 
-                    if (alter.ToLower() == "yes")
+                    if (alter.ToLower() == "yes") // nested if statement 
                     {
                         Console.WriteLine($"Enter the number of calories for {ingName}: ");
-                        calories = int.Parse(Console.ReadLine());
+                        calories = int.Parse(Console.ReadLine()); // if the second if statement executes the value for calorie will be updated 
 
                     }
 
@@ -274,11 +278,11 @@ namespace ST10257503.PROG6221POEPart1
 
 
 
-                Console.WriteLine($"Enter the food group for {ingName}: ");
+                Console.WriteLine($"Enter the food group for {ingName}: "); // Promt for food group
 
                 foodGroup = Console.ReadLine();
 
-
+            
 
 
 
@@ -313,7 +317,7 @@ namespace ST10257503.PROG6221POEPart1
 
 
 
-                Ingredient ingredient = new Ingredient(ingName, ingredientQuantity, ingredientMeasurement, additionalYES, calories, foodGroup);
+                Ingredient ingredient = new Ingredient(ingName, ingredientQuantity, ingredientMeasurement, additionalYES, calories, foodGroup); // adding to ingridents
                 recipe.AddIngredient(ingredient);
 
 
