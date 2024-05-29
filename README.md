@@ -1,6 +1,6 @@
-# ST10257503.PROG6221POEPart1
+# ST10257503.PROG6221POEPart2
 
-# Kashvir Sewpersad ST10257503.PROG6221POEPart1
+# Kashvir Sewpersad ST10257503.PROG6221POEPart2
 
 # commit sample
 # commit sample screenshot
@@ -15,10 +15,20 @@
 # Code run execution 
 //************ instructions on how to run code ******************//
 
- * start off by logging in to visual studio 2022 
+//----------------------------------- Requirements-----------------------------------------//
+visual studio IDE (Ideally 2022)
+C# (4.8)
+Desktop or PC
+Prior knowledge with C# coding
+The downloaded zip file
+//-----------------------------------------------------------------------------------------//
+
+ * start off by logging in to visual studio 2022 (install Visual Studio: Download and install the latest version of Visual Studio from visualstudio.microsoft.com.)
+   
  *  unzip the project folder
- * press build and run  
- * the app will prompt you to add in certain information
+ *  Open sln code in visual studio
+ * press build and run (The green play icon) 
+ * the app will prompt you to add in certain information which is a sequential and guided process
  * there is a lot of exceptionhandling so it is particularly forgiving
  * once all data is captured you will be redirected to a menu system. 
  * This menu system will provide you with a series of options 
