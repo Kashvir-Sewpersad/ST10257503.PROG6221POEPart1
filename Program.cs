@@ -32,20 +32,36 @@ namespace ST10257503.PROG6221POEPart1
          The goal with my main method is to have a switch statement which will be used to control the actions based of user input
          This includes method calls and displaying a table 
          */
+
+
+
         static void Main(string[] args)
         {
             // Console.WriteLine("run test");
 
             FunctionalityClass fc = new FunctionalityClass(); // created a object of the functionality class
 
+            fc.Mesasge();
+
+
+            // Subscribe to the event
+            fc.OnCaloriesExceeded += (recipeName) =>
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"Warning: The recipe '{recipeName}' exceeds 300 calories.");
+                    Console.ResetColor();
+                    Console.WriteLine("You may want to reduce portion size or remove item");
+                };
+
+
 
             ///////////////// start of field declerations ////////////////////////
-            
+
             int choice; //choice variable created to be used for user input
 
             //////////////// end of field declerations //////////////////////////
 
-
+            Console.WriteLine("\n");
             Console.WriteLine(" Welcome to the Recipe App !!! ");
 
             Console.WriteLine("View the Menu below and choose an option");
@@ -60,25 +76,26 @@ namespace ST10257503.PROG6221POEPart1
              
              */
 
-            //**************************** start of menu ****************************//
+          
 
-            while (true) {
 
-                Console.WriteLine(" ------------- Menu system --------------- ");
-             
-                Console.WriteLine("1.**** Make New Recipe ****"); // This menu will display as soon as a user runs the program
-              
-                Console.WriteLine("2.**** Display Recipe ****");
-              
-                Console.WriteLine("3.**** Scale Up or Down Recipe ****");
-              
-                Console.WriteLine("4.**** Reset ****");
-            
-                Console.WriteLine("5.**** Delete Recipe ****");
-            
-                Console.WriteLine("6.**** Exit Menu ****");
-
-                Console.WriteLine(" ----------------------------------------- ");
+            while (true)
+            {
+                Console.WriteLine("\n");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("------------- Menu system ---------------");
+                Console.ResetColor();
+                Console.WriteLine("1. Make New Recipe");
+                Console.WriteLine("2. Display List of Recipes");
+                Console.WriteLine("3. Display Recipe");
+                Console.WriteLine("4. Scale Up or Down Recipe");
+                Console.WriteLine("5. Reset");
+                Console.WriteLine("6. Delete Recipe");
+                Console.WriteLine("7. Exit Menu");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("-----------------------------------------");
+                Console.ResetColor();
+                Console.WriteLine("\n");
 
 
                 /*
@@ -98,6 +115,7 @@ namespace ST10257503.PROG6221POEPart1
                  */
                 catch(FormatException e)
                 {
+                    Console.WriteLine("You seem to have made a mistake" + e.Message );
                     Console.WriteLine("\n");
                     Console.WriteLine("Enter only numbers "); // This will display if a format error was encountered
                     Console.WriteLine("\n");
@@ -108,43 +126,41 @@ namespace ST10257503.PROG6221POEPart1
                 /*
                  Based on the user input which has by now passed the try catch block and should be free from errors. We will now pass the user input stored in the choice variable to the switch statement
                  */
-                switch (choice) {
-                    
+                switch (choice)
+                {
                     case 1:
-                        fc.Capture(); // method call to capture method
+                        fc.Capture();
                         break;
-
                     case 2:
-                        fc.Print(); // method call to print method
+                        fc.Print();
                         break;
-
                     case 3:
-                        fc.Scale(); // method call to scale method
+                        Console.WriteLine("Enter the recipe name to display: ");
+                        string recipeName = Console.ReadLine();
+                        fc.DisplayRecipe(recipeName);
                         break;
-
                     case 4:
-                        fc.Reset(); // method call to reset method
+                        fc.Scale();
                         break;
-
                     case 5:
-                        fc.Clear(); // method call to clear method
+                        fc.Reset();
                         break;
-
                     case 6:
-                        Environment.Exit(0); // Environment.Exit(0) is a elegent way of exiting the program as per just crashing it 
-                        return; //This return statement is from the Catch block earlier. 
+                        fc.Clear();
                         break;
-
+                    case 7:
+                        Environment.Exit(0);
+                        break;
                     default:
-                        Console.WriteLine("Your input is out of bounds (1-6)"); // I have added a default case, however the try catch should have weeded out any issues by now
+                        Console.WriteLine("Your input is out of bounds (1-7)");
                         break;
-
-                       
-
                 }
+            
+       
+        }
 
 
-            }
+    }
 
            
 
@@ -154,6 +170,6 @@ namespace ST10257503.PROG6221POEPart1
         //******************* end of main method ******************************************//
 
     }
-}
+
 
 //******************************** end of file ***************************************//

@@ -21,7 +21,16 @@ namespace ST10257503.PROG6221POEPart1
 
         public string Addition { get; set; }
 
-        public Ingredient(string name, double quantity, string unit , string addition )
+
+        //--------------------- updates ----------------------------//
+
+        public int Calories { get; set; } 
+        public string FoodGroup { get; set; } 
+
+
+
+
+        public Ingredient(string name, double quantity, string unit , string addition, int calories, string foodGroup)
         {
             Name = name;
 
@@ -30,6 +39,12 @@ namespace ST10257503.PROG6221POEPart1
             Unit = unit;
 
             Addition = addition;
+
+            //-----------------------------------------------------//
+
+            Calories = calories;
+
+            FoodGroup = foodGroup;
         }
     }
 

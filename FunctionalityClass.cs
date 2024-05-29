@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,7 @@ namespace ST10257503.PROG6221POEPart1
     /// 
     /// 
     /// ------------------------------------------ Required changes based on lecturer feedback ------------------------------------------- ///
+    /// 
     /// 
     /// 1) improved exception handling (with regards to null input) : IN PROGRESS
     /// 
@@ -43,15 +45,30 @@ namespace ST10257503.PROG6221POEPart1
      
      */
     internal class FunctionalityClass
+
+
     {
         //**************************** start of storage system ***********************//
 
 
 
-        private List<Ingredient> ingredients; // I have created an array list to store the ingredents
+         public List<Ingredient> ingredients; // I have created an array list to store the ingredents
 
-        private List<string> steps; // Here I have created one to store the steps involed in the recipe
-        private List<double> originalQuantities;
+         public List<string> steps; // Here I have created one to store the steps involed in the recipe
+
+         public List<double> originalQuantities;
+
+
+        public Dictionary<string, Recipe> recipes;
+
+        // Delegate for notification
+        public delegate void CaloriesExceededHandler(string recipeName);
+
+        public event CaloriesExceededHandler OnCaloriesExceeded;
+
+
+
+
         /*
          side note, I should have created a seperate class for the steps, including getters and setters however for this case its not nessesary 
          */
@@ -65,14 +82,14 @@ namespace ST10257503.PROG6221POEPart1
         //******************************* start of constructor ***********************//
         public FunctionalityClass()
         {
-            ingredients = new List<Ingredient>();
+              ingredients = new List<Ingredient>();
 
-            steps = new List<string>();
+             steps = new List<string>();
+
+            recipes = new Dictionary<string, Recipe>();
         }
 
         //******************************* end of constructor ***********************//
-
-
 
 
 
@@ -98,9 +115,9 @@ namespace ST10257503.PROG6221POEPart1
             string recipeName;
 
 
+            int calories;
 
-
-
+            string foodGroup;
 
 
             //************************************************** end of aalterations ***********************************************//
@@ -146,25 +163,25 @@ namespace ST10257503.PROG6221POEPart1
             As per the requirements of part 2 users must be able to add an ingrident name for each ingrident
              */
 
-          //  try
-          //  {
+
+        
                 Console.WriteLine("Please enter the recipe name : ");
 
                 recipeName = Console.ReadLine();
 
 
-           // }
-            
-            
-            
-          //  catch(Exception ex) 
-            
-           // {
-            
-            
-           // }
 
             //***************************** end of name addition and storage ********************************//
+
+
+
+            if (recipes.ContainsKey(recipeName))
+            {
+                Console.WriteLine("Recipe already exists. Please enter a unique name.");
+                return;
+            }
+
+            Recipe recipe = new Recipe(recipeName);
 
 
 
@@ -179,6 +196,7 @@ namespace ST10257503.PROG6221POEPart1
             }
             catch (FormatException e)
             {
+                Console.WriteLine("You seem to have made a mistake" + e.Message);
                 Console.WriteLine(" ENTER NUMBERS ONLY "); // This catch block will execute if a format error occurs. That will come in the form of a user inputing letters
 
                 return;
@@ -204,11 +222,62 @@ namespace ST10257503.PROG6221POEPart1
                     ingredientQuantity = int.Parse(Console.ReadLine()); // Variable will be screened, converted and stored 
                 }
                 catch (FormatException e) {
-
+                    Console.WriteLine("You seem to have made a mistake" + e.Message);
                     Console.WriteLine("Please enter your answer in numerical notation"); 
 
                     return;
                 }
+
+
+
+
+
+                try
+                {
+                    Console.WriteLine($"Enter the number of calories for {ingName}: ");
+
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid. Please enter a  number.");
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine("Input is too large. Please enter a smaller number.");
+                }
+                catch (Exception e) {
+                    Console.WriteLine("You seem to have made a mistake" + e.Message);
+                }
+                
+
+                calories = int.Parse(Console.ReadLine());
+
+                if (calories >= 300) 
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"Warning: The recipe '{recipeName}' exceeds 300 calories.");
+                    Console.ResetColor();
+                    Console.WriteLine("You may want to reduce portion size or remove item");
+                    Console.WriteLine("Would you like to reduce the calories Yes or No");
+                    string alter = Console.ReadLine();
+
+                            if (alter.ToLower() == "yes") 
+                            {
+                                Console.WriteLine($"Enter the number of calories for {ingName}: ");
+                                calories = int.Parse(Console.ReadLine());
+
+                            }
+
+                }
+
+
+
+                Console.WriteLine($"Enter the food group for {ingName}: ");
+
+                 foodGroup = Console.ReadLine();
+
+
+
 
 
                 Console.WriteLine($"Enter the measurement for the {ingName} in cups: "); // prompt for a measurement
@@ -237,8 +306,17 @@ namespace ST10257503.PROG6221POEPart1
                     Console.WriteLine("No aditional information added "); // This will output if the if statements conditions are not met
                 }
 
-                ingredients.Add(new Ingredient(ingName, ingredientQuantity, ingredientMeasurement, additionalYES)); // All the aquired information is added to the arraylist 
+                //  ingredients.Add(new Ingredient(ingName, ingredientQuantity, ingredientMeasurement, additionalYES)); // All the aquired information is added to the arraylist 
+
+
+
+                Ingredient ingredient = new Ingredient(ingName, ingredientQuantity, ingredientMeasurement, additionalYES, calories, foodGroup);
+                recipe.AddIngredient(ingredient);
+
+
+
             }
+
 
 
 
@@ -246,6 +324,9 @@ namespace ST10257503.PROG6221POEPart1
              We are now onto the steps part of it.I will use a try catch for any dangerous data
              
              */
+
+
+
 
             try
             {
@@ -255,10 +336,13 @@ namespace ST10257503.PROG6221POEPart1
                 stepCount = int.Parse(Console.ReadLine()); // Stored and converted if applicable
 
             }
+
+
+
             catch (FormatException e)
             {
                 Console.WriteLine("Steps requires a numerical input");
-
+                Console.WriteLine("You seem to have made a mistake" + e.Message);
                 return;
             }
 
@@ -289,10 +373,24 @@ namespace ST10257503.PROG6221POEPart1
 
                 }
 
-                steps.Add(step); // Here i am adding the steps to the array
+                recipe.AddStep(step); // Here i am adding the steps to the array
 
-                steps.Add(extraStepYes); // same as above but for aditional steps 
+                recipe.AddStep(extraStepYes); // same as above but for aditional steps
+                                              // 
+
+
             }
+
+
+
+
+            recipes.Add(recipeName, recipe);
+
+            if (recipe.TotalCalories > 300)
+            {
+                OnCaloriesExceeded?.Invoke(recipeName);
+            }
+
 
             Console.WriteLine("Details captured");
 
@@ -313,53 +411,46 @@ namespace ST10257503.PROG6221POEPart1
 
         public void Print()
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(" ----------- Recipe -------------  ");
-            Console.ResetColor();
-
-
-            Console.WriteLine("\n");
-
-
-
-
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("---- Ingredients ----"); // header
-            Console.ResetColor();
-
-
-            Console.WriteLine("\n");
-
-            foreach (var ingredient in ingredients)
-            {
-
-                Console.ForegroundColor = ConsoleColor.Green;
-                // Output the ingredient values from the array 
-                Console.WriteLine($"{ingredient.Quantity} {ingredient.Unit} {ingredient.Addition} of {ingredient.Name} ");
-                Console.ResetColor();
-
-            }
-
-            Console.WriteLine("\n");
-
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(" ------------- Steps ----------------- "); // header
-            Console.ResetColor();
-
-
-
-            Console.WriteLine("\n");
-
-            for (int y = 0; y < steps.Count; y++)
+            
+            Console.WriteLine("Recipes: ");
+            foreach (var recipe in recipes.Values.OrderBy(r => r.Name))
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
-
-                Console.WriteLine($" {y + 1}.   {steps[y]} "); // This will output the values from the steps array
-
+                Console.WriteLine($"- {recipe.Name}");
                 Console.ResetColor();
             }
         }
+
+        public void DisplayRecipe(string recipeName)
+        {
+            if (recipes.ContainsKey(recipeName))
+            {
+                Recipe recipe = recipes[recipeName];
+                Console.WriteLine($"Recipe: {recipe.Name}");
+                Console.WriteLine("Ingredients:");
+                foreach (var ingredient in recipe.Ingredients)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($" {ingredient.Name} {ingredient.Quantity + " Grams (g) "} {ingredient.Unit + " Cups "}   ({ingredient.Calories} calories, {ingredient.FoodGroup})");
+                    Console.ResetColor();
+                }
+                Console.WriteLine("Steps:");
+                for (int i = 0; i < recipe.Steps.Count; i++)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"{i + 1}. {recipe.Steps[i]}");
+                    Console.ResetColor();
+                }
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Total Calories: {recipe.TotalCalories}");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.WriteLine("Recipe not found.");
+            }
+        }
+
 
 
         //********************************************* end of print out ********************************//
@@ -390,17 +481,17 @@ namespace ST10257503.PROG6221POEPart1
                 }
             }
             catch (FormatException)
-            {
-                Console.WriteLine("Please enter numbers only.");
+                {
+                    Console.WriteLine("Please enter numbers only.");
 
-                return;
-            }
-            catch (Exception) // this will execute if all other catches fail 
-            {
-                Console.WriteLine("An error occurred.");
+                    return;
+                }
+                    catch (Exception) // this will execute if all other catches fail 
+                    {
+                        Console.WriteLine("An error occurred.");
 
-                return;
-            }
+                        return;
+                    }
             finally
             {
 
@@ -428,6 +519,7 @@ namespace ST10257503.PROG6221POEPart1
             foreach (Ingredient ingredient in ingredients)
             {
                 ingredient.Quantity *= fact;
+               // ingredient.Unit *= fact; 
             }
 
             Console.WriteLine("Recipe scaled successfully!");
@@ -437,8 +529,9 @@ namespace ST10257503.PROG6221POEPart1
 
             foreach (var ingredient in ingredients)
             {
-
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"{ingredient.Quantity} of {ingredient.Name}"); // output quantity and name
+                Console.ResetColor();
 
             }
             Console.WriteLine(" ------------------------- ");
@@ -522,7 +615,71 @@ namespace ST10257503.PROG6221POEPart1
                 
             }
 
+
+        public void Mesasge() {
+
+                 Console.WriteLine("Please Enter Your Name : ");
+                String FirstName = Console.ReadLine();
+
+                Console.WriteLine("\n");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Welcome " + FirstName);
+                Console.ResetColor();
+                Console.WriteLine("\n");
+
+                Console.WriteLine("This Is A Recipe App So Heres A Quick Brief On The 7 Food Groups");
+
+
+                Console.WriteLine("\n");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("1.Fruits");
+                Console.WriteLine("Rich in vitamins, minerals , fiber, and antioxidants. Fruits are healty but can have a lot of calories");
+                Console.ResetColor();
+
+
+                Console.WriteLine("\n");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("2.Vegetables");
+                Console.WriteLine("High in vitamins , minerals (iron,  magnesium), fiber, and antioxidants. These are generally lower in calories than fruit");
+                Console.ResetColor();
+
+
+                Console.WriteLine("\n");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("3.Grains");
+                Console.WriteLine("Provides carbs, fiber, B vitamins, iron and magnesium. These can be good in moderation Commonly found in items in the forms of seeds");
+                Console.ResetColor();
+
+
+                Console.WriteLine("\n");
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.WriteLine("4.Protein");
+                Console.WriteLine("Rich in protein, B vitamins B12, iron, zinc, and essential fatty acids. This is a building block and should be consumed in moderation.Commonly found in items such as meat or beans");
+                Console.ResetColor();
+
+
+                Console.WriteLine("\n");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("5.Dairy");
+                Console.WriteLine("High in calcium, Whey protein, vitamin D, and other essential nutrients like  potassium.Commonly found in milk products like Cheese");
+                Console.ResetColor();
+
+                Console.WriteLine("\n");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("6.Oils and Fat");
+                Console.WriteLine("Provide essential fatty acids, vitamin E, and energy.These aid in absorbsion of nutrients. Fat and oils are found in all organic matter");
+                Console.ResetColor();
+
+                Console.WriteLine("\n");
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                Console.WriteLine("7.Sweets and Sugars");
+                Console.WriteLine("While not essential, they can provide quick energy. However, consumption should be limited due to potential negative health effects. These are high in calories");
+                Console.ResetColor();
+                Console.WriteLine("\n");
         }
+
+        }
+   
     }
 
 //******************************************** end of file *************************************************//
