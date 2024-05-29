@@ -20,7 +20,7 @@ namespace ST10257503.PROG6221POEPart1
      /// 
      /// 
      /// 
-     /// https://github.com/Kashvir-Sewpersad/ST10257503.PROG6221POEPart1.git
+
      /// 
      /// B. C. (2021, July 3). C# exception handling ⚠️. YouTube. https://www.youtube.com/watch?v=QqWfw_CFR6Q
      /// T. (2018, February 5). C# - Arrays. YouTube. https://www.youtube.com/watch?v=daFdTssjm3w
